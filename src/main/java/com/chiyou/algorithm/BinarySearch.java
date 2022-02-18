@@ -3,7 +3,7 @@ package com.chiyou.algorithm;
 import java.util.Arrays;
 
 /**
- * 二分查找
+ * 二分查找   时间复杂度log2(n)
  */
 public class BinarySearch {
 

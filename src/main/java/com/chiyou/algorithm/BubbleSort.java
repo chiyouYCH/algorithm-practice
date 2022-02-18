@@ -1,10 +1,13 @@
 package com.chiyou.algorithm;
 
-import java.util.Arrays;
+import javax.annotation.Resource;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 冒泡排序
+ * 冒泡排序  时间复杂度o（2^n）
  */
+@Resource
 public class BubbleSort {
 
     /**
@@ -66,10 +69,10 @@ public class BubbleSort {
     }
 
     public static void main(String[] args) {
+//        ConcurrentHashMap
         int[] oldArrys = {5,4,3,7,2,8,9,11};
         BubbleSort.rightSort(oldArrys);
         BubbleSort.leftSort(oldArrys);
-
         Arrays.sort(oldArrys);
         System.out.println(Arrays.toString(oldArrys));
     }
