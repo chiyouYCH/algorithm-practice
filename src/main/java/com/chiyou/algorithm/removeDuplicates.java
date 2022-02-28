@@ -12,6 +12,7 @@ import java.util.Set;
  */
 public class removeDuplicates {
 
+    //执行时间2ms
     public static int removeDuplicates(int[] nums) {
         if (nums == null || nums.length == 0) {
             return 0;
@@ -26,6 +27,25 @@ public class removeDuplicates {
             }
         }
         return slowIndex;
+    }
+
+    //优秀案例执行时间0ms
+    public int removeDuplicates1(int[] nums) {
+        // 使用双指针
+        if(nums==null || nums.length == 1){
+            return nums.length;
+        }
+        int i = 0,j =1;
+        while(j<nums.length){
+            if(nums[i]==nums[j]){
+                j++;
+            }else{
+                i++;
+                nums[i]=nums[j];
+                j++;
+            }
+        }
+        return i+1;
     }
 
     public static void main(String[] args) {
