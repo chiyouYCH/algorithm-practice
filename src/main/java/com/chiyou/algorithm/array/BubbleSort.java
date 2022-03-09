@@ -1,8 +1,7 @@
-package com.chiyou.algorithm;
+package com.chiyou.algorithm.array;
 
 import javax.annotation.Resource;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 冒泡排序  时间复杂度o（2^n）

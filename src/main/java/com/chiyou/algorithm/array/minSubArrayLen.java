@@ -1,4 +1,4 @@
-package com.chiyou.algorithm;
+package com.chiyou.algorithm.array;
 
 import java.util.LinkedList;
 import java.util.List;
