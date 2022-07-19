@@ -10,7 +10,7 @@ import javax.swing.*;
  */
 public class swapPairs {
 
-    //TODO未实现
+    //TODO未实现 本题最好还是用递归
     public ListNode swapPairs(ListNode head) {
         if (head == null || head.next == null) {
             return head;
@@ -63,6 +63,21 @@ public class swapPairs {
         return result.next;
     }
 
+    //20220719复习
+    public ListNode swapPairs0719(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode newNode = head.next;
+
+        ListNode child = swapPairs0719(newNode.next);
+
+        newNode.next = head;
+        newNode.next.next=child;
+
+        return newNode;
+    }
+
     public static void main(String[] args) {
         ListNode listNode = new ListNode();
         ListNode listNode1 = new ListNode();
@@ -74,6 +89,6 @@ public class swapPairs {
         listNode.setNext(listNode1);
         swapPairs reverseList = new swapPairs();
         System.out.println(listNode.toString());
-        System.out.println(reverseList.swapPairs2(listNode).toString());
+        System.out.println(reverseList.swapPairs0719(listNode).toString());
     }
 }
