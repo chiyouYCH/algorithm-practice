@@ -33,8 +33,14 @@ public class BitOperationTest {
         System.out.println("转换后x:"+ x +"转换后y："+y);
     }
 
+    /**
+     * ＆如果相对应位都是1，则结果为1，否则为0	（A＆B），得到12，即0000 1100
+     * |如果相对应位都是 0，则结果为 0，否则为 1	（A | B）得到61，即 0011 1101
+     * @param args
+     */
     public static void main(String[] args) {
         evenOrOdd(10);
         swap(4,5);
+        System.out.println(2&4);
     }
 }

@@ -6,6 +6,8 @@ import com.huaban.analysis.jieba.viterbi.FinalSeg;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -62,9 +64,9 @@ public class EncodeTest {
      * @throws UnsupportedEncodingException
      */
     public static void main(String[] args) throws UnsupportedEncodingException {
-        //测试乱码
-        testAllCharset("醱勤掩\uF847极\uF815鏢厗腔峉儂ㄛ\uF815蠅眒冪羶衄域楊疑疑汜湔狟\uF7EF賸ㄛ憩砉岆醱勤骨痌腔瓷\uF815珨欴ㄛ疑疑華徹藩珨毞ㄛ毀奧汜堤賸拸癹洷咡﹝");
-//        stringToUnicode("服务器内部错");
+        //测试乱码 景蹺祥橇窀ㄛ123word揭揭恓杽纏455word
+        testAllCharset("给岁月以文明，而不是给文明以岁月");
+        stringToUnicode("给岁月以文明，而不是给文明以岁月");
 //        JiebaSegmenter segmenter = new JiebaSegmenter();
 //        List<String> result = segmenter.sentenceProcess("鏈嶅姟鍣ㄥ唴閮ㄩ敊璇");
 //        System.out.println(result);
@@ -73,6 +75,7 @@ public class EncodeTest {
 //        List<String> result2 = segmenter.sentenceProcess("服务器内部错");
 //        System.out.println(result2);
         printText("醱勤掩\uF847极\uF815鏢厗腔峉儂ㄛ\uF815蠅眒冪羶衄域楊疑疑汜湔狟\uF7EF賸ㄛ憩砉岆醱勤骨痌腔瓷\uF815珨欴ㄛ疑疑華徹藩珨毞ㄛ毀奧汜堤賸拸癹洷咡﹝");
+        unicodeDecode("\\u7ed9\\u5c81\\u6708\\u4ee5\\u6587\\u660e\\uff0c\\u800c\\u4e0d\\u662f\\u7ed9\\u6587\\u660e\\u4ee5\\u5c81\\u6708");
         if ("锘挎槬鐪犱笉瑙夋檽锛屽澶勯椈鍟奸笩".matches("[\\u4E00-\\u9FA5]+")) {
             System.out.println("这是中文");
         } else {
@@ -87,6 +90,18 @@ public class EncodeTest {
         }
     }
 
+    public static String unicodeDecode(String string) {
+        Pattern pattern = Pattern.compile("(\\\\u(\\p{XDigit}{4}))");
+        Matcher matcher = pattern.matcher(string);
+        char ch;
+        while (matcher.find()) {
+            ch = (char) Integer.parseInt(matcher.group(2), 16);
+            string = string.replace(matcher.group(1), ch + "");
+        }
+        System.out.println(string);
+        return string;
+    }
+
     /**
      * 1.校验输入是否本身为正常
      * 2.汉字： [0x4e00,0x9fa5]（或十进制 [19968,40869]） 数字： [0x30,0x39]（或十进制 [48, 57]） 小写字母： [0x61,0x7a]（或十进制 [97, 122]）
@@ -97,6 +112,7 @@ public class EncodeTest {
             System.out.println("文本不能为空");
             return;
         }
+        text = unicodeDecode(text);
         List<String> usualList = getUsualList();
         int resultMax = 0;
         int count1 = 500;
@@ -117,7 +133,7 @@ public class EncodeTest {
                 }
                 String newStr = new String(btArr, originCharset);
                 String[] singleWord = newStr.split("");
-                List<String> collect = Arrays.stream(singleWord).filter(s -> usualList.contains(s)).collect(Collectors.toList());
+                List<String> collect = Arrays.stream(singleWord).filter(s -> usualList.contains(s) || s.matches("^[0-9]*$") || s.matches("^[A-Za-z]+$")).collect(Collectors.toList());
 
 
 //                List<String> result2 = segmenter.sentenceProcess(newStr);

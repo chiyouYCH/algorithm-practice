@@ -43,8 +43,31 @@ public class SingleNumber {
         return ans;
     }
 
+    //复习
+    public static int[] singleNumber1(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return null;
+        }
+        int filter =0;
+        for (int num : nums) {
+            filter=filter^num;
+        }
+        int mask = filter & (-filter);
+        int[] result = new int[2];
+        for (int num : nums) {
+            if ((num & mask) == 0) {
+                result[0] ^= num;
+            } else {
+                result[1] ^= num;
+            }
+        }
+        System.out.println(result[0]+"-复习--"+result[1]);
+        return result;
+    }
+
     public static void main(String[] args) {
         int[] num = new int[]{1,2,1,3,2,5};
         singleNumber(num);
+        singleNumber1(num);
     }
 }
