@@ -14,13 +14,8 @@ public class MaxDepth {
         if (root== null) {
             return 0;
         }
-        if (root.left == null && root.right == null) {
-            return 1;
-        }
-        int left = maxDepth(root.left,1);
-        int right = maxDepth(root.right,1);
-        int result = Math.max(left, right);
-        return result;
+        int result = maxDepth(root,0);
+        return result+1;
     }
 
     private static int maxDepth(TreeNode child, int i) {
@@ -38,6 +33,18 @@ public class MaxDepth {
         return result;
     }
 
+    public static int maxDepthDemo(TreeNode root) {
+        //终止条件：当树为空时结束递归，并返回当前深度0
+        if(root == null){
+            return 0;
+        }
+        //root的左、右子树的最大深度
+        int leftDepth = maxDepthDemo(root.left);
+        int rightDepth = maxDepthDemo(root.right);
+        //返回的是左右子树的最大深度+1
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
+
     public static void main(String[] args) {
         TreeNode root = new TreeNode();
         root.val=1;
@@ -50,5 +57,8 @@ public class MaxDepth {
 
         int max = maxDepth(root);
         System.out.println(max);
+
+        int i = maxDepthDemo(root);
+        System.out.println(i);
     }
 }
