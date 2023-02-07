@@ -13,6 +13,18 @@ public class ListNode {
      ListNode(int val) { this.val = val; }
      ListNode(int val, ListNode next) { this.val = val; this.next = next; }
 
+     public ListNode(int[] nums){
+          ListNode parent = null;
+          for (int i = nums.length - 1; i >= 0; i--) {
+               ListNode cur = new ListNode();
+               cur.val = nums[i];
+               cur.next = parent;
+               parent = cur;
+
+          }
+          next = parent;
+     }
+
      public int getVal() {
           return val;
      }
